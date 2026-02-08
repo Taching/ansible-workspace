@@ -1,8 +1,12 @@
 # Oh-My-Zsh
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
 ZSH_THEME="agnoster"
 plugins=(git)
-source $ZSH/oh-my-zsh.sh
+if [ -d "$ZSH" ]; then
+  source "$ZSH/oh-my-zsh.sh"
+else
+  echo "oh-my-zsh not found at $ZSH"
+fi
 
 # Personal aliases
 alias work="cd ~/Work"

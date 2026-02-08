@@ -8,6 +8,8 @@
 
   pre_tasks:
     - import_tasks: tasks/iterm2.yml
+    - import_tasks: tasks/ohmyzsh.yml
+    - import_tasks: tasks/dotfiles.yml
 
   roles:
     - role: geerlingguy.mac.homebrew
@@ -15,8 +17,6 @@
 
   tasks:
     - import_tasks: tasks/homebrew.yml
-    - import_tasks: tasks/ohmyzsh.yml
-    - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/ssh-setup.yml
     - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/editor-extensions.yml

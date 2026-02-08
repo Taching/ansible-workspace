@@ -1,7 +1,7 @@
 ---
 - name: Check if Oh-My-Zsh is installed
   stat:
-    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    path: "{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
   register: ohmyzsh_installed
   tags: ['ohmyzsh', 'dotfiles']
 
