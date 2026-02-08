@@ -8,6 +8,11 @@ else
   echo "oh-my-zsh not found at $ZSH"
 fi
 
+# Start new interactive shells in ~/Work when possible.
+if [ -t 1 ] && [ "$PWD" = "$HOME" ] && [ -d "$HOME/Work" ]; then
+  cd "$HOME/Work"
+fi
+
 # Personal aliases
 alias work="cd ~/Work"
 alias start="npm run dev"
