@@ -5,6 +5,11 @@ setup:
 
 preflight:
 	@set -e; \
+	if ! command -v brew >/dev/null 2>&1; then \
+		if [ -x /opt/homebrew/bin/brew ]; then eval "$$(/opt/homebrew/bin/brew shellenv)"; \
+		elif [ -x /usr/local/bin/brew ]; then eval "$$(/usr/local/bin/brew shellenv)"; \
+		fi; \
+	fi; \
 	command -v brew >/dev/null 2>&1 || { echo "Homebrew is required. Install from https://brew.sh/"; exit 1; }; \
 	command -v ansible-playbook >/dev/null 2>&1 || { echo "Ansible is required. Run: brew install ansible"; exit 1; }; \
 	mkdir -p ~/Work; \
