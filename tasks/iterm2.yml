@@ -5,10 +5,32 @@
   register: iterm2_plist
   tags: ['iterm2']
 
+- name: Check if iTerm2 preferences file exists locally
+  stat:
+    path: "{{ ansible_env.HOME }}/Library/Preferences/com.googlecode.iterm2.plist"
+  register: iterm2_local_plist
+  tags: ['iterm2']
+
+- name: Copy local iTerm2 preferences into repo (if missing)
+  copy:
+    src: "{{ ansible_env.HOME }}/Library/Preferences/com.googlecode.iterm2.plist"
+    dest: "{{ playbook_dir }}/files/iterm2/com.googlecode.iterm2.plist"
+    remote_src: true
+    mode: "0644"
+  when: not iterm2_plist.stat.exists and iterm2_local_plist.stat.exists
+  tags: ['iterm2']
+
 - name: Convert iTerm2 plist to XML
   command: >
     plutil -convert xml1 -o /tmp/iterm2.plist {{ playbook_dir }}/files/iterm2/com.googlecode.iterm2.plist
   when: iterm2_plist.stat.exists
+  changed_when: false
+  tags: ['iterm2']
+
+- name: Quit iTerm2 before importing preferences
+  command: osascript -e 'tell application "iTerm2" to quit'
+  when: iterm2_plist.stat.exists
+  ignore_errors: true
   changed_when: false
   tags: ['iterm2']
 
