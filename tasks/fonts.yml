@@ -1,0 +1,51 @@
+---
+- name: Check if iCloud Drive fonts folder exists
+  stat:
+    path: "{{ ansible_env.HOME }}/Library/Mobile Documents/com~apple~CloudDocs/ansible-setup/fonts"
+  register: icloud_fonts_dir
+  tags: ['fonts']
+
+- name: Warn if iCloud fonts folder not found
+  debug:
+    msg: >
+      iCloud Drive fonts folder not found at
+      ~/Library/Mobile Documents/com~apple~CloudDocs/ansible-setup/fonts/.
+      Upload your fonts first:
+      cp -r ~/Library/Fonts/* ~/Library/Mobile\ Documents/com~apple~CloudDocs/ansible-setup/fonts/
+  when: not icloud_fonts_dir.stat.exists
+  tags: ['fonts']
+
+- name: Ensure ~/Library/Fonts directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Fonts"
+    state: directory
+  when: icloud_fonts_dir.stat.exists
+  tags: ['fonts']
+
+- name: Find font files in iCloud Drive
+  find:
+    paths: "{{ ansible_env.HOME }}/Library/Mobile Documents/com~apple~CloudDocs/ansible-setup/fonts"
+    patterns: "*.otf,*.ttf"
+    file_type: file
+  register: icloud_fonts
+  when: icloud_fonts_dir.stat.exists
+  tags: ['fonts']
+
+- name: Warn if no fonts were found
+  debug:
+    msg: "No .otf or .ttf files found in iCloud Drive fonts folder."
+  when:
+    - icloud_fonts_dir.stat.exists
+    - (icloud_fonts.files | default([]) | length) == 0
+  tags: ['fonts']
+
+- name: Copy fonts from iCloud Drive
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item.path | basename }}"
+    remote_src: yes
+  loop: "{{ icloud_fonts.files | default([]) }}"
+  when:
+    - icloud_fonts_dir.stat.exists
+    - (icloud_fonts.files | default([]) | length) > 0
+  tags: ['fonts']

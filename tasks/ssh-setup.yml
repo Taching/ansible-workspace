@@ -1,0 +1,48 @@
+---
+- name: Ensure .ssh directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+    mode: '0700'
+  tags: ['ssh']
+
+- name: Generate SSH key (ed25519) if not exists
+  community.crypto.openssh_keypair:
+    path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
+    type: ed25519
+    comment: "{{ git_user_email }}"
+  register: ssh_key_result
+  tags: ['ssh']
+
+- name: Copy SSH config
+  copy:
+    src: files/ssh/config
+    dest: "{{ ansible_env.HOME }}/.ssh/config"
+    mode: '0600'
+    backup: yes
+  tags: ['ssh']
+
+- name: Add SSH key to macOS keychain
+  shell: >
+    ssh-add --apple-use-keychain {{ ansible_env.HOME }}/.ssh/id_ed25519
+  register: ssh_add_result
+  changed_when: false
+  failed_when: false
+  tags: ['ssh']
+
+- name: Warn if ssh-add failed
+  debug:
+    msg: "ssh-add failed (rc={{ ssh_add_result.rc }}). You may need to start ssh-agent or unlock Keychain."
+  when: ssh_add_result.rc != 0
+  tags: ['ssh']
+
+- name: Display public key for GitHub setup
+  debug:
+    msg: |
+      ============================================================
+      Add this SSH key to GitHub -> Settings -> SSH and GPG keys:
+      {{ lookup('file', ansible_env.HOME + '/.ssh/id_ed25519.pub') }}
+      ============================================================
+      URL: https://github.com/settings/ssh/new
+  when: ssh_key_result.changed
+  tags: ['ssh']

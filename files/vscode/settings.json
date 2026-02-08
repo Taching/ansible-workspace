@@ -1,0 +1,63 @@
+{
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "files.autoSave": "off",
+  "editor.fontFamily": "Operator Mono",
+  "editor.fontSize": 16,
+  "editor.fontWeight": "600",
+  "editor.lineHeight": 30,
+  "editor.letterSpacing": 0.2,
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+  "editor.cursorBlinking": "solid",
+  "editor.guides.bracketPairs": true,
+  "files.trimTrailingWhitespace": true,
+  "guides.enabled": false,
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "git.autofetch": true,
+  "explorer.confirmDelete": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "breadcrumbs.enabled": true,
+  "explorer.confirmDragAndDrop": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "eslint.validate": ["javascript"],
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "never"
+    }
+  },
+  "editor.formatOnSave": true,
+  "terminal.explorerKind": "external",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.startupEditor": "none",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "prisma.showPrismaDataPlatformNotification": false,
+  "workbench.iconTheme": "vscode-icons",
+  "remote.SSH.showLoginTerminal": true,
+  "remote.SSH.remoteServerListenOnSocket": true,
+  "remote.SSH.useExecServer": false,
+  "remote.SSH.path": "/usr/bin/ssh",
+  "remote.SSH.remotePlatform": {
+    "rpi": "linux"
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1"
+}

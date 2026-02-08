@@ -1,0 +1,19 @@
+---
+- name: Check if iTerm2 preferences file exists in repo
+  stat:
+    path: "{{ playbook_dir }}/files/iterm2/com.googlecode.iterm2.plist"
+  register: iterm2_plist
+  tags: ['iterm2']
+
+- name: Convert iTerm2 plist to XML
+  command: >
+    plutil -convert xml1 -o /tmp/iterm2.plist {{ playbook_dir }}/files/iterm2/com.googlecode.iterm2.plist
+  when: iterm2_plist.stat.exists
+  changed_when: false
+  tags: ['iterm2']
+
+- name: Import iTerm2 preferences
+  command: defaults import com.googlecode.iterm2 /tmp/iterm2.plist
+  when: iterm2_plist.stat.exists
+  changed_when: false
+  tags: ['iterm2']

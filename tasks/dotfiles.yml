@@ -1,0 +1,55 @@
+---
+- name: Create workflow scripts directory
+  file:
+    path: "{{ ansible_env.HOME }}/.bin/.local/scripts"
+    state: directory
+    mode: '0755'
+  tags: ['dotfiles']
+
+- name: Copy .zshrc
+  copy:
+    src: files/dotfiles/.zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    backup: yes
+  tags: ['dotfiles']
+
+- name: Copy .zprofile
+  copy:
+    src: files/dotfiles/.zprofile
+    dest: "{{ ansible_env.HOME }}/.zprofile"
+    backup: yes
+  tags: ['dotfiles']
+
+- name: Copy workflow.sh
+  copy:
+    src: files/dotfiles/workflow.sh
+    dest: "{{ ansible_env.HOME }}/.bin/.local/scripts/workflow.sh"
+    mode: '0755'
+  tags: ['dotfiles']
+
+- name: Ensure skhd config directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config/skhd"
+    state: directory
+  tags: ['dotfiles', 'wm']
+
+- name: Copy skhdrc
+  copy:
+    src: files/wm/skhdrc
+    dest: "{{ ansible_env.HOME }}/.config/skhd/skhdrc"
+    backup: yes
+  tags: ['dotfiles', 'wm']
+
+- name: Ensure yabai config directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config/yabai"
+    state: directory
+  tags: ['dotfiles', 'wm']
+
+- name: Copy yabairc
+  copy:
+    src: files/wm/yabairc
+    dest: "{{ ansible_env.HOME }}/.config/yabai/yabairc"
+    mode: '0755'
+    backup: yes
+  tags: ['dotfiles', 'wm']

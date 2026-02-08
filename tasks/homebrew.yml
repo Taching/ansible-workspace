@@ -1,0 +1,18 @@
+---
+- name: Ensure Homebrew is updated
+  community.general.homebrew:
+    update_homebrew: true
+  tags: ['homebrew']
+
+- name: Check for corepack
+  command: corepack --version
+  register: corepack_check
+  ignore_errors: true
+  changed_when: false
+  tags: ['homebrew']
+
+- name: Enable corepack (Node-managed package managers)
+  command: corepack enable
+  when: corepack_check.rc == 0
+  changed_when: false
+  tags: ['homebrew']

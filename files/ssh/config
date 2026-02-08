@@ -1,0 +1,18 @@
+# --- GitHub Accounts ---
+
+# Personal GitHub: Taching
+Host github.com
+  HostName github.com
+  User Taching
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_ed25519
+  UseKeychain yes
+  AddKeysToAgent yes
+
+# Work GitHub (if separate key needed)
+# Host github.com-work
+#   HostName github.com
+#   PreferredAuthentications publickey
+#   IdentityFile ~/.ssh/id_ed25519_work
+#   UseKeychain yes
+#   AddKeysToAgent yes

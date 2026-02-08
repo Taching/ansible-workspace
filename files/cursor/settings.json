@@ -1,0 +1,66 @@
+{
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "audioCues.enabled": "off",
+  "workbench.audioCues.enabled": "off",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "files.autoSave": "off",
+  "editor.fontFamily": "Operator Mono",
+  "editor.fontSize": 16,
+  "editor.fontWeight": "600",
+  "editor.lineHeight": 30,
+  "editor.letterSpacing": 0.2,
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+  "editor.cursorBlinking": "solid",
+  "editor.guides.bracketPairs": true,
+  "files.trimTrailingWhitespace": true,
+  "guides.enabled": false,
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "git.autofetch": true,
+  "explorer.confirmDelete": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "breadcrumbs.enabled": true,
+  "explorer.confirmDragAndDrop": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "eslint.validate": ["javascript"],
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "never"
+    }
+  },
+  "editor.formatOnSave": true,
+  "terminal.explorerKind": "external",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.startupEditor": "none",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "prisma.showPrismaDataPlatformNotification": false,
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "vscode-icons",
+  "playwright.reuseBrowser": false,
+  "playwright.showTrace": true,
+  "workbench.editor.editorActionsLocation": "hidden",
+  "editor.accessibilitySupport": "on",
+  "accessibility.signals.chatEditModifiedFile": { "sound": "off" },
+  "accessibility.signals.chatRequestSent": { "sound": "off", "announcement": "off" },
+  "accessibility.signals.chatResponseReceived": { "sound": "off" },
+  "accessibility.signals.codeActionApplied": { "sound": "off" },
+  "accessibility.signals.clear": { "sound": "off", "announcement": "off" },
+  "accessibility.signalOptions.volume": 0
+}

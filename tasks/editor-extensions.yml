@@ -1,0 +1,40 @@
+---
+- name: Check if Cursor CLI is available
+  command: cursor --version
+  register: cursor_cli_check
+  ignore_errors: true
+  changed_when: false
+  tags: ['extensions']
+
+- name: List installed Cursor extensions
+  command: cursor --list-extensions
+  register: cursor_installed_list
+  when: cursor_cli_check.rc == 0
+  changed_when: false
+  tags: ['extensions']
+
+- name: Install missing Cursor extensions
+  command: "cursor --install-extension {{ item }}"
+  loop: "{{ cursor_extensions | difference(cursor_installed_list.stdout_lines | default([])) }}"
+  when: cursor_cli_check.rc == 0
+  tags: ['extensions']
+
+- name: Check if VSCode CLI is available
+  command: code --version
+  register: vscode_cli_check
+  ignore_errors: true
+  changed_when: false
+  tags: ['extensions']
+
+- name: List installed VSCode extensions
+  command: code --list-extensions
+  register: vscode_installed_list
+  when: vscode_cli_check.rc == 0
+  changed_when: false
+  tags: ['extensions']
+
+- name: Install missing VSCode extensions
+  command: "code --install-extension {{ item }}"
+  loop: "{{ vscode_extensions | difference(vscode_installed_list.stdout_lines | default([])) }}"
+  when: vscode_cli_check.rc == 0
+  tags: ['extensions']

@@ -1,0 +1,140 @@
+---
+# Homebrew Taps
+homebrew_taps:
+  - homebrew/cask-fonts
+  - koekeishiya/formulae
+
+# Homebrew Formulae (CLI tools)
+homebrew_installed_packages:
+  - awscli
+  - fzf
+  - gcc
+  - gh
+  - git
+  - go
+  - jq
+  - node
+  - php
+  - pnpm
+  - postgresql@14
+  - pyenv
+  - python@3.13
+  - rust
+  - skhd
+  - typescript
+  - yabai
+  - yarn
+  - 1password-cli
+
+# Homebrew Casks (GUI applications)
+homebrew_cask_apps:
+  - chatgpt
+  - claude
+  - cursor
+  - divvy
+  - slack
+  - istat-menus
+  - iterm2
+  - spotify
+  - zoom
+  - alfred
+  - 1password
+  - visual-studio-code
+  - google-chrome
+  - datagrip
+  - docker
+  - notion
+  - postman
+  - graphiql
+  - miniconda
+  - font-meslo-lg-nerd-font
+
+# Cursor Extensions (39 — active only)
+cursor_extensions:
+  - anthropic.claude-code
+  - anysphere.cursorpyright
+  - anysphere.pyright
+  - bradlc.vscode-tailwindcss
+  - christian-kohler.npm-intellisense
+  - christian-kohler.path-intellisense
+  - csstools.postcss
+  - dbaeumer.vscode-eslint
+  - eamodio.gitlens
+  - esbenp.prettier-vscode
+  - formulahendry.auto-close-tag
+  - formulahendry.auto-rename-tag
+  - github.vscode-github-actions
+  - graphql.vscode-graphql
+  - graphql.vscode-graphql-execution
+  - graphql.vscode-graphql-syntax
+  - karlito40.fix-irregular-whitespace
+  - lokalise.i18n-ally
+  - mikestead.dotenv
+  - ms-azuretools.vscode-docker
+  - ms-playwright.playwright
+  - ms-python.black-formatter
+  - ms-python.debugpy
+  - ms-python.isort
+  - ms-python.python
+  - ms-python.vscode-pylance
+  - ms-toolsai.jupyter
+  - ms-toolsai.jupyter-keymap
+  - ms-toolsai.jupyter-renderers
+  - ms-toolsai.vscode-jupyter-cell-tags
+  - ms-toolsai.vscode-jupyter-slideshow
+  - ms-vscode-remote.remote-containers
+  - ms-vscode.makefile-tools
+  - openai.chatgpt
+  - orta.vscode-twoslash-queries
+  - prisma.prisma
+  - vitest.explorer
+  - vscode-icons-team.vscode-icons
+  - vue.volar
+
+# VSCode Extensions (41 — active only)
+vscode_extensions:
+  - bradlc.vscode-tailwindcss
+  - christian-kohler.npm-intellisense
+  - christian-kohler.path-intellisense
+  - csstools.postcss
+  - dbaeumer.vscode-eslint
+  - docker.docker
+  - eamodio.gitlens
+  - esbenp.prettier-vscode
+  - formulahendry.auto-close-tag
+  - formulahendry.auto-rename-tag
+  - github.copilot
+  - github.copilot-chat
+  - graphql.vscode-graphql
+  - graphql.vscode-graphql-execution
+  - graphql.vscode-graphql-syntax
+  - karlito40.fix-irregular-whitespace
+  - lokalise.i18n-ally
+  - mikestead.dotenv
+  - ms-azuretools.vscode-docker
+  - ms-playwright.playwright
+  - ms-python.black-formatter
+  - ms-python.debugpy
+  - ms-python.isort
+  - ms-python.python
+  - ms-python.vscode-pylance
+  - ms-python.vscode-python-envs
+  - ms-toolsai.jupyter
+  - ms-toolsai.jupyter-keymap
+  - ms-toolsai.jupyter-renderers
+  - ms-toolsai.vscode-jupyter-cell-tags
+  - ms-toolsai.vscode-jupyter-slideshow
+  - ms-vscode-remote.remote-containers
+  - ms-vscode-remote.remote-ssh
+  - ms-vscode-remote.remote-ssh-edit
+  - ms-vscode.remote-explorer
+  - openai.chatgpt
+  - orta.vscode-twoslash-queries
+  - prisma.prisma
+  - vitest.explorer
+  - vscode-icons-team.vscode-icons
+  - vue.volar
+
+# Git Configuration
+git_user_name: "Takatoshi Wada"
+git_user_email: "fueledbytaching@gmail.com"

@@ -1,0 +1,12 @@
+---
+- name: Check if Oh-My-Zsh is installed
+  stat:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: ohmyzsh_installed
+  tags: ['ohmyzsh', 'dotfiles']
+
+- name: Install Oh-My-Zsh (unattended)
+  shell: >
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  when: not ohmyzsh_installed.stat.exists
+  tags: ['ohmyzsh', 'dotfiles']

@@ -1,0 +1,26 @@
+---
+- name: Ensure Cursor settings directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Application Support/Cursor/User"
+    state: directory
+  tags: ['editor-settings']
+
+- name: Copy Cursor settings.json
+  copy:
+    src: files/cursor/settings.json
+    dest: "{{ ansible_env.HOME }}/Library/Application Support/Cursor/User/settings.json"
+    backup: yes
+  tags: ['editor-settings']
+
+- name: Ensure VSCode settings directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Application Support/Code/User"
+    state: directory
+  tags: ['editor-settings']
+
+- name: Copy VSCode settings.json
+  copy:
+    src: files/vscode/settings.json
+    dest: "{{ ansible_env.HOME }}/Library/Application Support/Code/User/settings.json"
+    backup: yes
+  tags: ['editor-settings']
