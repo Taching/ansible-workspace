@@ -3,6 +3,8 @@
 setup:
 	./bootstrap.sh
 
+GALAXY_IGNORE_CERTS ?= 1
+
 preflight:
 	@set -e; \
 	if ! command -v brew >/dev/null 2>&1; then \
@@ -15,7 +17,7 @@ preflight:
 	mkdir -p ~/Work; \
 	mkdir -p ~/.ansible/tmp; \
 	curl -fsS -I https://galaxy.ansible.com/api/ >/dev/null; \
-	if [ "$${GALAXY_IGNORE_CERTS:-}" = "1" ]; then \
+	if [ "$${GALAXY_IGNORE_CERTS:-1}" = "1" ]; then \
 		ansible-galaxy collection install -r requirements.yml --ignore-certs; \
 	else \
 		ansible-galaxy collection install -r requirements.yml; \

@@ -30,7 +30,8 @@ echo "==> Installing Ansible..."
 brew install ansible
 
 echo "==> Installing Ansible Galaxy requirements..."
-if [ "${GALAXY_IGNORE_CERTS:-}" = "1" ]; then
+: "${GALAXY_IGNORE_CERTS:=1}"
+if [ "${GALAXY_IGNORE_CERTS}" = "1" ]; then
   ansible-galaxy collection install -r requirements.yml --ignore-certs
 else
   ansible-galaxy collection install -r requirements.yml

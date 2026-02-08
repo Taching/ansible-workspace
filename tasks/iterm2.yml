@@ -23,7 +23,7 @@
     url: "{{ iterm2_plist_url }}"
     dest: /tmp/iterm2.plist
     mode: "0644"
-    validate_certs: "{{ (lookup('env','GALAXY_IGNORE_CERTS') != '1') }}"
+    validate_certs: "{{ (lookup('env','GALAXY_IGNORE_CERTS') | default('1')) != '1' }}"
   when: not iterm2_plist.stat.exists and (iterm2_plist_url is defined) and (iterm2_plist_url | length > 0)
   tags: ['iterm2']
 
@@ -90,6 +90,24 @@
     ITERM2_DEFAULT_DIR: "{{ iterm2_default_directory | default('~/Work') | expanduser }}"
   when: iterm2_source_plist is defined
   changed_when: true
+  tags: ['iterm2']
+
+- name: Save modified plist into repo folder
+  copy:
+    src: /tmp/iterm2.plist
+    dest: "{{ playbook_dir }}/files/iterm2/com.googlecode.iterm2.plist"
+    remote_src: true
+    mode: "0644"
+  when: iterm2_source_plist is defined
+  tags: ['iterm2']
+
+- name: Save modified plist into user preferences
+  copy:
+    src: /tmp/iterm2.plist
+    dest: "{{ ansible_facts['env']['HOME'] }}/Library/Preferences/com.googlecode.iterm2.plist"
+    remote_src: true
+    mode: "0644"
+  when: iterm2_source_plist is defined
   tags: ['iterm2']
 
 - name: Quit iTerm2 before importing preferences
