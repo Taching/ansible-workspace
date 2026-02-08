@@ -11,6 +11,22 @@
   register: iterm2_local_plist
   tags: ['iterm2']
 
+- name: Download iTerm2 preferences from URL (if configured and missing in repo)
+  get_url:
+    url: "{{ iterm2_plist_url }}"
+    dest: /tmp/iterm2.plist
+    mode: "0644"
+  when: not iterm2_plist.stat.exists and (iterm2_plist_url is defined) and (iterm2_plist_url | length > 0)
+  tags: ['iterm2']
+
+- name: Select iTerm2 preferences source
+  set_fact:
+    iterm2_source_plist: >-
+      {{ (iterm2_plist.stat.exists | bool) | ternary(playbook_dir + '/files/iterm2/com.googlecode.iterm2.plist',
+         (iterm2_local_plist.stat.exists | bool) | ternary(ansible_env.HOME + '/Library/Preferences/com.googlecode.iterm2.plist',
+         '/tmp/iterm2.plist')) }}
+  tags: ['iterm2']
+
 - name: Copy local iTerm2 preferences into repo (if missing)
   copy:
     src: "{{ ansible_env.HOME }}/Library/Preferences/com.googlecode.iterm2.plist"
@@ -22,20 +38,20 @@
 
 - name: Convert iTerm2 plist to XML
   command: >
-    plutil -convert xml1 -o /tmp/iterm2.plist {{ playbook_dir }}/files/iterm2/com.googlecode.iterm2.plist
-  when: iterm2_plist.stat.exists
+    plutil -convert xml1 -o /tmp/iterm2.plist {{ iterm2_source_plist }}
+  when: iterm2_source_plist is defined
   changed_when: false
   tags: ['iterm2']
 
 - name: Quit iTerm2 before importing preferences
   command: osascript -e 'tell application "iTerm2" to quit'
-  when: iterm2_plist.stat.exists
+  when: iterm2_source_plist is defined
   ignore_errors: true
   changed_when: false
   tags: ['iterm2']
 
 - name: Import iTerm2 preferences
   command: defaults import com.googlecode.iterm2 /tmp/iterm2.plist
-  when: iterm2_plist.stat.exists
+  when: iterm2_source_plist is defined
   changed_when: false
   tags: ['iterm2']

@@ -9,6 +9,9 @@ homebrew_cask_accept_external_apps: true
 homebrew_cask_install_options:
   - --adopt
 
+# Optional: iTerm2 preferences plist to import.
+iterm2_plist_url: "https://raw.githubusercontent.com/Taching/dotfiles/master/iterm2/com.googlecode.iterm2.plist"
+
 # Homebrew Formulae (CLI tools)
 homebrew_installed_packages:
   - awscli
