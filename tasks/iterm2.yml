@@ -70,3 +70,23 @@
   when: iterm2_source_plist is defined
   changed_when: false
   tags: ['iterm2']
+
+- name: Point iTerm2 to repo preferences folder
+  command: >
+    defaults write com.googlecode.iterm2 PrefsCustomFolder
+    -string "{{ playbook_dir }}/files/iterm2"
+  when: iterm2_source_plist is defined
+  changed_when: true
+  tags: ['iterm2']
+
+- name: Enable loading preferences from custom folder
+  command: defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+  when: iterm2_source_plist is defined
+  changed_when: true
+  tags: ['iterm2']
+
+- name: Relaunch iTerm2 to apply preferences
+  command: open -a iTerm
+  when: iterm2_source_plist is defined
+  changed_when: false
+  tags: ['iterm2']
