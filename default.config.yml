@@ -11,6 +11,9 @@ homebrew_cask_install_options:
 
 # Optional: iTerm2 preferences plist to import.
 iterm2_plist_url: "https://raw.githubusercontent.com/Taching/dotfiles/master/iterm2/com.googlecode.iterm2.plist"
+iterm2_default_directory: "~/Work"
+iterm2_font: "MesloLGS NF"
+iterm2_font_size: 12
 
 # Homebrew Formulae (CLI tools)
 homebrew_installed_packages:

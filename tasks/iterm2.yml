@@ -58,6 +58,40 @@
   changed_when: false
   tags: ['iterm2']
 
+- name: Ensure iTerm2 default directory exists
+  file:
+    path: "{{ iterm2_default_directory | default('~/Work') | expanduser }}"
+    state: directory
+    mode: "0755"
+  when: iterm2_source_plist is defined
+  tags: ['iterm2']
+
+- name: Force iTerm2 font and default directory in plist
+  command: >
+    /usr/bin/python3 - <<'PY'
+    import os, plistlib
+    plist_path = "/tmp/iterm2.plist"
+    with open(plist_path, "rb") as f:
+      data = plistlib.load(f)
+    font = os.environ.get("ITERM2_FONT", "MesloLGS NF")
+    size = int(os.environ.get("ITERM2_FONT_SIZE", "12"))
+    default_dir = os.environ.get("ITERM2_DEFAULT_DIR", os.path.expanduser("~/Work"))
+    bookmarks = data.get("New Bookmarks", [])
+    for b in bookmarks:
+      b["Normal Font"] = f"{font} {size}"
+      b["Custom Directory"] = "Yes"
+      b["Working Directory"] = default_dir
+    with open(plist_path, "wb") as f:
+      plistlib.dump(data, f)
+    PY
+  environment:
+    ITERM2_FONT: "{{ iterm2_font | default('MesloLGS NF') }}"
+    ITERM2_FONT_SIZE: "{{ iterm2_font_size | default(12) }}"
+    ITERM2_DEFAULT_DIR: "{{ iterm2_default_directory | default('~/Work') | expanduser }}"
+  when: iterm2_source_plist is defined
+  changed_when: true
+  tags: ['iterm2']
+
 - name: Quit iTerm2 before importing preferences
   command: osascript -e 'tell application "iTerm2" to quit'
   when: iterm2_source_plist is defined
