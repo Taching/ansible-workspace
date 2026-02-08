@@ -1,7 +1,6 @@
 ---
 # Homebrew Taps
 homebrew_taps:
-  - homebrew/cask-fonts
   - koekeishiya/formulae
 
 # Homebrew Formulae (CLI tools)
