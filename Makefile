@@ -15,7 +15,11 @@ preflight:
 	mkdir -p ~/Work; \
 	mkdir -p ~/.ansible/tmp; \
 	curl -fsS -I https://galaxy.ansible.com/api/ >/dev/null; \
-	ansible-galaxy collection install -r requirements.yml; \
+	if [ "$${GALAXY_IGNORE_CERTS:-}" = "1" ]; then \
+		ansible-galaxy collection install -r requirements.yml --ignore-certs; \
+	else \
+		ansible-galaxy collection install -r requirements.yml; \
+	fi; \
 	ansible-playbook --syntax-check -i inventory main.yml
 
 update:

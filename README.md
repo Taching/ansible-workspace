@@ -14,6 +14,12 @@ make preflight
 
 This also creates `~/Work` if it doesn't exist.
 
+If you hit SSL errors with Ansible Galaxy (common behind corporate proxies), run:
+
+```bash
+GALAXY_IGNORE_CERTS=1 make preflight
+```
+
 ## Update
 
 ```bash
