@@ -5,6 +5,9 @@ homebrew_taps:
 
 # Allow Homebrew to proceed when apps already exist in /Applications.
 homebrew_cask_accept_external_apps: true
+# Adopt existing apps in /Applications instead of failing.
+homebrew_cask_install_options:
+  - --adopt
 
 # Homebrew Formulae (CLI tools)
 homebrew_installed_packages:
