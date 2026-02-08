@@ -16,6 +16,7 @@
     url: "{{ iterm2_plist_url }}"
     dest: /tmp/iterm2.plist
     mode: "0644"
+    validate_certs: "{{ (lookup('env','GALAXY_IGNORE_CERTS') != '1') }}"
   when: not iterm2_plist.stat.exists and (iterm2_plist_url is defined) and (iterm2_plist_url | length > 0)
   tags: ['iterm2']
 
