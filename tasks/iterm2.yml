@@ -19,12 +19,19 @@
   when: not iterm2_plist.stat.exists and (iterm2_plist_url is defined) and (iterm2_plist_url | length > 0)
   tags: ['iterm2']
 
+- name: Check if downloaded iTerm2 preferences exist
+  stat:
+    path: /tmp/iterm2.plist
+  register: iterm2_downloaded_plist
+  tags: ['iterm2']
+
 - name: Select iTerm2 preferences source
   set_fact:
     iterm2_source_plist: >-
       {{ (iterm2_plist.stat.exists | bool) | ternary(playbook_dir + '/files/iterm2/com.googlecode.iterm2.plist',
          (iterm2_local_plist.stat.exists | bool) | ternary(ansible_env.HOME + '/Library/Preferences/com.googlecode.iterm2.plist',
          '/tmp/iterm2.plist')) }}
+  when: iterm2_plist.stat.exists or iterm2_local_plist.stat.exists or iterm2_downloaded_plist.stat.exists
   tags: ['iterm2']
 
 - name: Copy local iTerm2 preferences into repo (if missing)

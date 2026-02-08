@@ -6,6 +6,9 @@
   vars_files:
     - default.config.yml
 
+  pre_tasks:
+    - import_tasks: tasks/iterm2.yml
+
   roles:
     - role: geerlingguy.mac.homebrew
       tags: ['homebrew']
@@ -18,5 +21,4 @@
     - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/editor-extensions.yml
     - import_tasks: tasks/editor-settings.yml
-    - import_tasks: tasks/iterm2.yml
     - import_tasks: tasks/git-config.yml
