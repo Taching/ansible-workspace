@@ -3,6 +3,9 @@
 homebrew_taps:
   - koekeishiya/formulae
 
+# Allow Homebrew to proceed when apps already exist in /Applications.
+homebrew_cask_accept_external_apps: true
+
 # Homebrew Formulae (CLI tools)
 homebrew_installed_packages:
   - awscli
